@@ -45,8 +45,8 @@ protected:
     }
 
 private:
-    std::string m_name;
-    std::vector<Fields> m_fields;
+    std::string m_name; //имя класса
+    std::vector<Fields> m_fields;// содержит 3 поля  добавления в него: public, private, protected
 
 };
 

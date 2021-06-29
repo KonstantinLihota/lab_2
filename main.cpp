@@ -12,9 +12,9 @@
 
 */
 std::string generateProgram( const std::shared_ptr< UnitFactory >& factory ) {//функция определяющуая логику генерирации кода
-
-    auto myClass = factory->createClass( "MyClass" );
-    myClass->add( factory->createMethod( "testFunc1", "void", MethodUnit::PUBLIC ) );
+                                                                                  //на вход передается умный указатель на генератор юнитов языка
+    auto myClass = factory->createClass( "MyClass" ); //определяем имя класса
+    myClass->add( factory->createMethod( "testFunc1", "void", MethodUnit::PUBLIC ) ); //добавить метод void
     myClass->add( factory->createMethod( "testFunc2", "void", MethodUnit::STATIC ) );
     myClass->add(
         factory->createMethod(
@@ -33,7 +33,7 @@ std::string generateProgram( const std::shared_ptr< UnitFactory >& factory ) {//
     return myClass->compile();
 }
 
-void Client(){
+void Client(){ //функция генерирующая код на всех заданых языках для проверки корректности работы программы
     std::cout << generateProgram( std::make_shared< C_Factory >() ) << std::endl;
     std::cout << generateProgram( std::make_shared< ChFactory >() ) << std::endl;
     std::cout << generateProgram( std::make_shared< JavaFactory >() ) << std::endl;

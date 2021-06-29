@@ -4,10 +4,12 @@
 #include<unit.h>
 #include<vector>
 
-class MethodUnit : public Unit //Класс обеспечивает логику построения методов  MyClass
+class MethodUnit : public Unit /* Абстрактный класс  обеспечивает логику построения блока метода MyClass*/
+
 {
 public:
-    enum Modifier { //Модификаторы для всех яп
+    enum Modifier { //Модификаторы для всех яп(в разных языках модификаторы могут оличаться)
+
         PUBLIC      = 1,
         PROTECTED   = 1 << 1,
         PRIVATE     = 1 << 2,
@@ -23,13 +25,13 @@ public:
     MethodUnit(const std::string &name, const std::string &returnType, Flags flags) : m_name(name), m_returnType(returnType), m_flags(flags)
     { }
 
-    void add(const std::shared_ptr<Unit> &unit) {
+    void add(const std::shared_ptr<Unit> &unit) { // функция добавляющяя дочернюю языковую конструкцию
         m_body.push_back(unit);
     }
 private:
-    std::string m_name;
-    std::string m_returnType;
-    Flags m_flags;
+    std::string m_name; // имя метода
+    std::string m_returnType; //возращаемый тип
+    Flags m_flags; //модификатор метода (virtual, const, static)
     std::vector<std::shared_ptr<Unit>> m_body;
 
 protected:
@@ -45,6 +47,7 @@ protected:
 };
 
 //конкретные классы для создания методов MyClass
+// для разных языков программирования конструкции и модификаторы будут различны, поэтому они вынесены в отдельные фабрики
 class CMethod : public MethodUnit {
 public:
     CMethod(const std::string& name, const std::string& returnType, Flags flags) :  MethodUnit( name, returnType, flags) { }
